@@ -50,30 +50,21 @@ int main(void)
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 
-	//  const uint32_t BSRR_address = 0x40020818U;
-	//  const uint32_t BSRR_set_pin_value = 0x00000100U;
-	//  const uint32_t BSRR_reset_pin_value = 0x01000000U;
-
 	WS2812B_color_t packet[2];
 
-	packet[0].green = 0xFF;
-	packet[0].red = 0xFF;
-	packet[0].blue = 0xFF;
+	packet[0].green = 0x00;
+	packet[0].red = 0x32;
+	packet[0].blue = 0xAF;
 
-	packet[1].green = 0xFF;
-	packet[1].red = 0xFF;
-	packet[1].blue = 0xFF;
+	packet[1].green = 0x0F;
+	packet[1].red = 0xF8;
+	packet[1].blue = 0x57;
 
 	while (1)
 	{
 		WS2812B_send_packet(packet, 2);
 
-		//WS2812B_send_RET();
-		//WS2812B_send_0();
-		//WS2812B_send_1();
-		//WS2812B_send_RET();
-		//asm("str %[value], [%[address]]" : : [value] "r" (BSRR_set_pin_value), [address] "r" (BSRR_address));
-		//asm("str %[value], [%[address]]" : : [value] "r" (BSRR_reset_pin_value), [address] "r" (BSRR_address));
+		HAL_Delay(1);
 	}
 }
 

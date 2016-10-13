@@ -19,13 +19,13 @@ inline void WS2812B_send_0(void)
 	asm("nop");
 	asm("nop");
 	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
+//	asm("nop");
+//	asm("nop");
+//	asm("nop");
+//	asm("nop");
+//	asm("nop");
+//	asm("nop");
+//	asm("nop");
 
 	LED_sdata_GPIO_Port->BSRR = (uint32_t)LED_sdata_Pin << 16U;
 	for(int indx = 0; indx < 10; indx++)
@@ -54,10 +54,6 @@ inline void WS2812B_send_1(void)
 	asm("nop");
 	asm("nop");
 	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
-	asm("nop");
 }
 
 inline void WS2812B_send_RET(void)
@@ -67,7 +63,6 @@ inline void WS2812B_send_RET(void)
 	{
 		asm("nop");
 	}
-	LED_sdata_GPIO_Port->BSRR = LED_sdata_Pin;
 }
 
 void WS2812B_send_packet(WS2812B_color_t* packet, uint32_t length)
