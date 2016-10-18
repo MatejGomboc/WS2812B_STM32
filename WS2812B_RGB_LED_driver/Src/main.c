@@ -52,7 +52,7 @@ int main(void)
 
 	while (1)
 	{
-		WS2812B_level_indicator(20, 24);
+		WS2812B_level_indicator(25, 24);
 	}
 }
 

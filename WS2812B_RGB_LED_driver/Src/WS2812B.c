@@ -8,6 +8,8 @@
 #include "gpio.h"
 #include "WS2812B.h"
 
+extern void Error_Handler(void);
+
 inline void WS2812B_send_0(void)
 {
 	LED_sdata_GPIO_Port->BSRR = LED_sdata_Pin;
@@ -88,6 +90,8 @@ void WS2812B_send_packet(WS2812B_color_t* packet, uint32_t length)
 
 void WS2812B_level_indicator(uint32_t strength, uint32_t length)
 {
+	if(strength > length) Error_Handler();
+
 	WS2812B_color_t packet[length];
 
 	for(int i = 0; i < strength; i++)
@@ -105,5 +109,4 @@ void WS2812B_level_indicator(uint32_t strength, uint32_t length)
 	}
 
 	WS2812B_send_packet(packet, length);
-	//HAL_Delay(1);
 }
