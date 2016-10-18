@@ -19,13 +19,6 @@ inline void WS2812B_send_0(void)
 	asm("nop");
 	asm("nop");
 	asm("nop");
-//	asm("nop");
-//	asm("nop");
-//	asm("nop");
-//	asm("nop");
-//	asm("nop");
-//	asm("nop");
-//	asm("nop");
 
 	LED_sdata_GPIO_Port->BSRR = (uint32_t)LED_sdata_Pin << 16U;
 	for(int indx = 0; indx < 10; indx++)
@@ -91,4 +84,26 @@ void WS2812B_send_packet(WS2812B_color_t* packet, uint32_t length)
 	}
 
 	WS2812B_send_RET();
+}
+
+void WS2812B_level_indicator(uint32_t strength, uint32_t length)
+{
+	WS2812B_color_t packet[length];
+
+	for(int i = 0; i < strength; i++)
+	{
+		packet[i].green = 0x00;
+		packet[i].red = 0xFF;
+		packet[i].blue = 0x00;
+	}
+
+	for(int i = strength; i < length; i++)
+	{
+		packet[i].green = 0xFF;
+		packet[i].red = 0x00;
+		packet[i].blue = 0x00;
+	}
+
+	WS2812B_send_packet(packet, length);
+	//HAL_Delay(1);
 }

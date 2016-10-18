@@ -50,21 +50,9 @@ int main(void)
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 
-	WS2812B_color_t packet[2];
-
-	packet[0].green = 0x00;
-	packet[0].red = 0x32;
-	packet[0].blue = 0xAF;
-
-	packet[1].green = 0x0F;
-	packet[1].red = 0xF8;
-	packet[1].blue = 0x57;
-
 	while (1)
 	{
-		WS2812B_send_packet(packet, 2);
-
-		HAL_Delay(1);
+		WS2812B_level_indicator(20, 24);
 	}
 }
 
