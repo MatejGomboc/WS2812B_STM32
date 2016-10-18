@@ -17,5 +17,6 @@ typedef struct
 
 extern void WS2812B_send_packet(WS2812B_color_t* packet, uint32_t length);
 extern void WS2812B_level_indicator(uint32_t strength, uint32_t length);
+extern void WS2812B_level_indicator_wLED(WS2812B_color_t special_LED_color, uint32_t strength, uint32_t length);
 
 #endif /* WS2812B_H_ */

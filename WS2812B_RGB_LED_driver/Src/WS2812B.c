@@ -110,3 +110,28 @@ void WS2812B_level_indicator(uint32_t strength, uint32_t length)
 
 	WS2812B_send_packet(packet, length);
 }
+
+void WS2812B_level_indicator_wLED(WS2812B_color_t special_LED_color, uint32_t strength, uint32_t length)
+{
+	if(strength > length) Error_Handler();
+
+	WS2812B_color_t packet[length + 1];
+
+	for(int i = 0; i < strength; i++)
+	{
+		packet[i].green = 0x00;
+		packet[i].red = 0xFF;
+		packet[i].blue = 0x00;
+	}
+
+	for(int i = strength; i < length; i++)
+	{
+		packet[i].green = 0xFF;
+		packet[i].red = 0x00;
+		packet[i].blue = 0x00;
+	}
+
+	packet[length] = special_LED_color;
+
+	WS2812B_send_packet(packet, length + 1);
+}

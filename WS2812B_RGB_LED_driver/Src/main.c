@@ -50,9 +50,14 @@ int main(void)
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 
+	WS2812B_color_t special_LED_color;
+	special_LED_color.red = 0xFF;
+	special_LED_color.green = 0x00;
+	special_LED_color.blue = 0xFF;
+
 	while (1)
 	{
-		WS2812B_level_indicator(25, 24);
+		WS2812B_level_indicator_wLED(special_LED_color, 10, 23);
 	}
 }
 
