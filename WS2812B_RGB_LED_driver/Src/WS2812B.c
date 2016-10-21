@@ -62,6 +62,13 @@ inline void WS2812B_send_RET(void)
 
 void WS2812B_send_packet(WS2812B_color_t* packet, uint32_t length)
 {
+	 /* Read PRIMASK register, check interrupt status before you disable them */
+	 /* Returns 0 if they are enabled, or non-zero if disabled */
+	uint32_t prim = __get_PRIMASK();
+
+	/* Disable interrupts */
+	__disable_irq();
+
 	WS2812B_send_RET();
 
 	for(uint32_t i = 0; i < length; i++)
@@ -86,6 +93,11 @@ void WS2812B_send_packet(WS2812B_color_t* packet, uint32_t length)
 	}
 
 	WS2812B_send_RET();
+
+	/* Enable interrupts back */
+	if (!prim) {
+		__enable_irq();
+	}
 }
 
 void WS2812B_level_indicator(uint32_t strength, uint32_t length)

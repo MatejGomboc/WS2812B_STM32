@@ -55,9 +55,16 @@ int main(void)
 	special_LED_color.green = 0x00;
 	special_LED_color.blue = 0xFF;
 
+	uint8_t strength = 0;
+
 	while (1)
 	{
-		WS2812B_level_indicator_wLED(special_LED_color, 10, 23);
+		WS2812B_level_indicator_wLED(special_LED_color, strength, 23);
+
+		HAL_Delay(200);
+
+		if(strength < 23) strength++;
+		else strength = 0;
 	}
 }
 
